@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nemele — Dossiê & Projetos</title>
+  
+  <!-- Fontes Editoriais -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0b0c10;
+      --surface: #14161d;
+      --surface-border: #232733;
+      --accent: #d4a373;
+      --accent-glow: rgba(212, 163, 115, 0.15);
+      --text-main: #f3f4f6;
+      --text-muted: #9496a1;
+      --wine: #7f2b3e;
+      --wine-soft: rgba(127, 43, 62, 0.25);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+      selection-background-color: var(--accent);
+    }
+
+    /* Grid & Layout de Revista */
+    .container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    header {
+      border-bottom: 1px solid var(--surface-border);
+      padding: 24px 0;
+      background: rgba(11, 12, 16, 0.85);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .nav-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      font-family: 'Cinzel', serif;
+      font-size: 1.4rem;
+      letter-spacing: 2px;
+      font-weight: 800;
+      color: var(--text-main);
+      text-transform: uppercase;
+    }
+
+    .brand span {
+      color: var(--accent);
+    }
+
+    .edition-tag {
+      font-family: 'Space Grotesk', monospace;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border: 1px solid var(--surface-border);
+      border-radius: 99px;
+    }
+
+    /* Hero Section / Capa */
+    .hero {
+      padding: 64px 0 48px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+
+    .headline-tag {
+      display: inline-block;
+      font-family: 'Space Grotesk', monospace;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      line-height: 1.08;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 24px;
+    }
+
+    .hero-lead {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      max-width: 520px;
+      margin-bottom: 32px;
+    }
+
+    .editorial-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 36px;
+    }
+
+    .badge {
+      font-size: 0.8rem;
+      padding: 8px 16px;
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: 6px;
+      color: var(--text-main);
+      font-weight: 500;
+    }
+
+    /* Moldura de Vídeo Interativo */
+    .video-card-wrapper {
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+
+    .video-frame {
+      position: relative;
+      width: 100%;
+      max-width: 360px;
+      aspect-ratio: 9 / 16;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7), 0 0 40px var(--accent-glow);
+      border: 1px solid var(--surface-border);
+      background: #000;
+    }
+
+    .video-frame video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .video-overlay-details {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 24px 20px;
+      background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.95) 80%);
+      pointer-events: none;
+    }
+
+    .video-caption {
+      font-size: 0.85rem;
+      color: #fff;
+      font-style: italic;
+      margin-bottom: 12px;
+    }
+
+    .video-controls {
+      display: flex;
+      gap: 10px;
+      pointer-events: auto;
+    }
+
+    .ctrl-btn {
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: 99px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .ctrl-btn:hover {
+      background: var(--accent);
+      color: #000;
+      border-color: var(--accent);
+    }
+
+    /* Seções da Revista */
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: 2rem;
+      margin-bottom: 8px;
+    }
+
+    .section-subtitle {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-bottom: 40px;
+    }
+
+    /* Dossiê & Projetos (Abas Interativas) */
+    .dossier-section {
+      padding: 70px 0;
+      border-top: 1px solid var(--surface-border);
+    }
+
+    .tab-triggers {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 32px;
+      overflow-x: auto;
+      padding-bottom: 8px;
+    }
+
+    .tab-btn {
+      background: var(--surface);
+      color: var(--text-muted);
+      border: 1px solid var(--surface-border);
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+
+    .tab-btn.active {
+      color: var(--text-main);
+      background: var(--surface-border);
+      border-color: var(--accent);
+    }
+
+    .tab-content {
+      display: none;
+      background: var(--surface);
+      border: 1px solid var(--surface-border);
+      border-radius: 16px;
+      padding: 40px;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .tab-content.active {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    @media (max-width: 768px) {
+      .tab-content.active {
+        grid-template-columns: 1fr;
+        padding: 24px;
+      }
+    }
+
+    .tab-text h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 1.5rem;
+      margin-bottom: 16px;
+      color: var(--accent);
+    }
+
+    .tab-text p {
+      color: #c9cbcf;
+      font-size: 0.95rem;
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+
+    .project-card {
+      background: var(--bg);
+      border: 1px solid var(--surface-border);
+      border-radius: 12px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .project-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .project-header span {
+      font-family: 'Space Grotesk', monospace;
+      font-size: 0.75rem;
+      color: var(--accent);
+    }
+
+    /* Rodapé Editorial */
+    footer {
+      border-top: 1px solid var(--surface-border);
+      padding: 40px 0;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Topo Editorial -->
+  <header>
+    <div class="container nav-bar">
+      <div class="brand">NEMELE <span>/</span> DOSSIÊ</div>
+      <div class="edition-tag">Volume I • Edição Independente</div>
+    </div>
+  </header>
+
+  <main class="container">
+    <!-- Hero / Apresentação -->
+    <section class="hero">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <span class="headline-tag">// Manifesto & Foco</span>
+          <h1 class="hero-title">Trabalho real, mente focada e zero ruído.</h1>
+          <p class="hero-lead">
+            Entre a exatidão dos números contábeis, a lógica dos algoritmos em construção e a responsabilidade de quem cuida de três vidas. Sem paciência para fofoca, mas sempre pronta para rir do absurdo da rotina.
+          </p>
+
+          <div class="editorial-badges">
+            <div class="badge">📊 Contabilidade Estruturada</div>
+            <div class="badge">💻 Lógica & Código</div>
+            <div class="badge">🤖 Parceria com IA</div>
+            <div class="badge">⚡ Foco nas 3 Vidas</div>
+          </div>
+        </div>
+
+        <!-- Vídeo Estilizado -->
+        <div class="video-card-wrapper">
+          <div class="video-frame">
+            <video id="heroVideo" autoplay loop muted playsinline src="meu-video.mp4">
+              Seu navegador não suporta a tag de vídeo.
+            </video>
+            
+            <div class="video-overlay-details">
+              <div class="video-caption">"Escutando música aleatória para amolecer a mente..."</div>
+              <div class="video-controls">
+                <button class="ctrl-btn" id="playBtn" onclick="togglePlay()">Pausar</button>
+                <button class="ctrl-btn" id="soundBtn" onclick="toggleMute()">Ativar Som</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dossiê de Projetos & Estudos -->
+    <section class="dossier-section">
+      <h2 class="section-title">Caderno de Estudos & Aplicação</h2>
+      <p class="section-subtitle">Como conecto dados, tecnologia e rotina prática sem enrolação.</p>
+
+      <!-- Gatilhos das Abas -->
+      <div class="tab-triggers">
+        <button class="tab-btn active" onclick="openTab('contabil')">01. Contabilidade Analítica</button>
+        <button class="tab-btn" onclick="openTab('codigo')">02. Programação & Automação</button>
+        <button class="tab-btn" onclick="openTab('ia')">03. Co-Piloto de IA</button>
+        <button class="tab-btn" onclick="openTab('vida')">04. Vida Real & Pilares</button>
+      </div>
+
+      <!-- Conteúdo das Abas -->
+      <div id="contabil" class="tab-content active">
+        <div class="tab-text">
+          <h3>Rigor & Estrutura Fiscal</h3>
+          <p>
+            O domínio da contabilidade é a base de tudo: análise de demonstrativos, saúde financeira e controle de processos. 
+          </p>
+          <p>
+            Em vez de me limitar à rotina burocrática convencional, o objetivo nos estudos é mapear pontos de estrangulamento para transformar regras fiscais em fluxos previsíveis e seguros.
+          </p>
+        </div>
+        <div class="project-card">
+          <div class="project-header">
+            <strong>Aplicação em Estudo</strong>
+            <span>PROJ-01</span>
+          </div>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">
+            Estruturação de fluxos operacionais e conciliações contábeis integradas, reduzindo redundâncias manuais na entrega de relatórios gerenciais.
+          </p>
+        </div>
+      </div>
+
+      <div id="codigo" class="tab-content">
+        <div class="tab-text">
+          <h3>Transição para Lógica de Código</h3>
+          <p>
+            Aprender programação não é sobre colecionar sintaxes, mas sobre criar soluções funcionais para problemas diários.
+          </p>
+          <p>
+            O foco está na automação de tarefas repetitivas, manipulação de arquivos e estruturação de interfaces limpas que economizam tempo real.
+          </p>
+        </div>
+        <div class="project-card">
+          <div class="project-header">
+            <strong>Ambiente Atual</strong>
+            <span>PROJ-02</span>
+          </div>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">
+            Projetos práticos no GitHub: scripts de automação, manipulação de dados tabulares e páginas responsivas publicadas diretamente na web.
+          </p>
+        </div>
+      </div>
+
+      <div id="ia" class="tab-content">
+        <div class="tab-text">
+          <h3>IA como Extensão de Capacidade</h3>
+          <p>
+            Interagir com inteligências artificiais com postura crítica e de comando: desenhando prompts eficientes para acelerar raciocínios técnicos, depurar código e testar cenários hipotéticos de negócios.
+          </p>
+          <p>
+            Quem sabe rir dos contratempos sabe também questionar alucinações de modelos e extrair apenas valor acionável.
+          </p>
+        </div>
+        <div class="project-card">
+          <div class="project-header">
+            <strong>Metodologia</strong>
+            <span>PROJ-03</span>
+          </div>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">
+            Workflows integrados onde a IA atua como assistente analítica de rascunhos, revisões lógicas e formulações de dashboards.
+          </p>
+        </div>
+      </div>
+
+      <div id="vida" class="tab-content">
+        <div class="tab-text">
+          <h3>O Filtro do Tempo Real</h3>
+          <p>
+            Cuidar de três vidas impõe uma métrica clara: tempo é o recurso mais escasso e valioso. 
+          </p>
+          <p>
+            Isso elimina espaço para pequenas fofocas, dramas desnecessários ou reuniões que não chegam a lugar nenhum. Quando as coisas dão errado, o humor autodepreciativo é o melhor mecanismo para recomeçar o dia seguinte.
+          </p>
+        </div>
+        <div class="project-card">
+          <div class="project-header">
+            <strong>Princípio Central</strong>
+            <span>VITAL</span>
+          </div>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">
+            Prioridade inegociável: consistência técnica, entrega silenciosa e presença dedicada onde realmente importa.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>Nemele Silva • Dossiê Editorial & Projetos • Publicado via GitHub Pages</p>
+    </div>
+  </footer>
+
+  <!-- Script Interativo das Abas e Controles de Vídeo -->
+  <script>
+    // Controle das Abas
+    function openTab(tabId) {
+      const contents = document.querySelectorAll('.tab-content');
+      const buttons = document.querySelectorAll('.tab-btn');
+
+      contents.forEach(content => content.classList.remove('active'));
+      buttons.forEach(btn => btn.classList.remove('active'));
+
+      document.getElementById(tabId).classList.add('active');
+      event.currentTarget.classList.add('active');
+    }
+
+    // Controles do Vídeo
+    const video = document.getElementById('heroVideo');
+    const playBtn = document.getElementById('playBtn');
+    const soundBtn = document.getElementById('soundBtn');
+
+    function togglePlay() {
+      if (video.paused) {
+        video.play();
+        playBtn.innerText = 'Pausar';
+      } else {
+        video.pause();
+        playBtn.innerText = 'Reproduzir';
+      }
+    }
+
+    function toggleMute() {
+      if (video.muted) {
+        video.muted = false;
+        soundBtn.innerText = 'Silenciar';
+      } else {
+        video.muted = true;
+        soundBtn.innerText = 'Ativar Som';
+      }
+    }
+  </script>
+</body>
+</html>

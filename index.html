@@ -35,10 +35,8 @@
       font-family: 'Plus Jakarta Sans', sans-serif;
       line-height: 1.6;
       overflow-x: hidden;
-      selection-background-color: var(--accent);
     }
 
-    /* Grid & Layout de Revista */
     .container {
       max-width: 1240px;
       margin: 0 auto;
@@ -85,7 +83,6 @@
       border-radius: 99px;
     }
 
-    /* Hero Section / Capa */
     .hero {
       padding: 64px 0 48px;
     }
@@ -147,7 +144,6 @@
       font-weight: 500;
     }
 
-    /* Moldura de Vídeo Interativo */
     .video-card-wrapper {
       position: relative;
       display: flex;
@@ -215,7 +211,6 @@
       border-color: var(--accent);
     }
 
-    /* Seções da Revista */
     .section-title {
       font-family: 'Cinzel', serif;
       font-size: 2rem;
@@ -228,7 +223,6 @@
       margin-bottom: 40px;
     }
 
-    /* Dossiê & Projetos (Abas Interativas) */
     .dossier-section {
       padding: 70px 0;
       border-top: 1px solid var(--surface-border);
@@ -319,7 +313,6 @@
       color: var(--accent);
     }
 
-    /* Rodapé Editorial */
     footer {
       border-top: 1px solid var(--surface-border);
       padding: 40px 0;
@@ -363,10 +356,12 @@
           </div>
         </div>
 
-        <!-- Vídeo Estilizado -->
+        <!-- Vídeo Vinculado ao Ficheiro Carregado -->
         <div class="video-card-wrapper">
           <div class="video-frame">
-            <video id="heroVideo" autoplay loop muted playsinline src="meu-video.mp4">
+            <video id="heroVideo" autoplay loop muted playsinline>
+              <source src="4fb4da1bfdd9b6c12432110" type="video/mp4">
+              <source src="4fb4da1bfdd9b6c12432110.mp4" type="video/mp4">
               Seu navegador não suporta a tag de vídeo.
             </video>
             
@@ -387,7 +382,6 @@
       <h2 class="section-title">Caderno de Estudos & Aplicação</h2>
       <p class="section-subtitle">Como conecto dados, tecnologia e rotina prática sem enrolação.</p>
 
-      <!-- Gatilhos das Abas -->
       <div class="tab-triggers">
         <button class="tab-btn active" onclick="openTab('contabil')">01. Contabilidade Analítica</button>
         <button class="tab-btn" onclick="openTab('codigo')">02. Programação & Automação</button>
@@ -395,12 +389,11 @@
         <button class="tab-btn" onclick="openTab('vida')">04. Vida Real & Pilares</button>
       </div>
 
-      <!-- Conteúdo das Abas -->
       <div id="contabil" class="tab-content active">
         <div class="tab-text">
           <h3>Rigor & Estrutura Fiscal</h3>
           <p>
-            O domínio da contabilidade é a base de tudo: análise de demonstrativos, saúde financeira e controle de processos. 
+            O domínio da contabilidade é a base de tudo: análise de demonstrativos, saúde financeira e controle de processos.
           </p>
           <p>
             Em vez de me limitar à rotina burocrática convencional, o objetivo nos estudos é mapear pontos de estrangulamento para transformar regras fiscais em fluxos previsíveis e seguros.
@@ -463,7 +456,7 @@
         <div class="tab-text">
           <h3>O Filtro do Tempo Real</h3>
           <p>
-            Cuidar de três vidas impõe uma métrica clara: tempo é o recurso mais escasso e valioso. 
+            Cuidar de três vidas impõe uma métrica clara: tempo é o recurso mais escasso e valioso.
           </p>
           <p>
             Isso elimina espaço para pequenas fofocas, dramas desnecessários ou reuniões que não chegam a lugar nenhum. Quando as coisas dão errado, o humor autodepreciativo é o melhor mecanismo para recomeçar o dia seguinte.
@@ -488,9 +481,7 @@
     </div>
   </footer>
 
-  <!-- Script Interativo das Abas e Controles de Vídeo -->
   <script>
-    // Controle das Abas
     function openTab(tabId) {
       const contents = document.querySelectorAll('.tab-content');
       const buttons = document.querySelectorAll('.tab-btn');
@@ -502,7 +493,6 @@
       event.currentTarget.classList.add('active');
     }
 
-    // Controles do Vídeo
     const video = document.getElementById('heroVideo');
     const playBtn = document.getElementById('playBtn');
     const soundBtn = document.getElementById('soundBtn');

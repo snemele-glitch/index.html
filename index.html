@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nemele — Dossiê & Projetos</title>
   
-  <!-- Fontes Editoriais -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;600&display=swap" rel="stylesheet">
@@ -19,8 +18,6 @@
       --accent-glow: rgba(212, 163, 115, 0.15);
       --text-main: #f3f4f6;
       --text-muted: #9496a1;
-      --wine: #7f2b3e;
-      --wine-soft: rgba(127, 43, 62, 0.25);
     }
 
     * {
@@ -176,7 +173,7 @@
       right: 0;
       padding: 24px 20px;
       background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.95) 80%);
-      pointer-events: none;
+      z-index: 10;
     }
 
     .video-caption {
@@ -189,17 +186,16 @@
     .video-controls {
       display: flex;
       gap: 10px;
-      pointer-events: auto;
     }
 
     .ctrl-btn {
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.2);
       backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 255, 255, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.35);
       color: #fff;
-      padding: 6px 14px;
+      padding: 8px 16px;
       border-radius: 99px;
-      font-size: 0.75rem;
+      font-size: 0.8rem;
       font-weight: 600;
       cursor: pointer;
       transition: all 0.2s ease;
@@ -354,18 +350,25 @@
           </div>
         </div>
 
-        <!-- Vídeo apontando exatamente para meu-video.mp4 -->
         <div class="video-card-wrapper">
           <div class="video-frame">
-            <video id="heroVideo" autoplay loop muted playsinline src="meu-video.mp4">
-              Seu navegador não suporta a tag de vídeo.
+            <video 
+              id="heroVideo" 
+              autoplay 
+              loop 
+              muted 
+              playsinline 
+              webkit-playsinline 
+              preload="auto">
+              <source src="./meu-video.mp4" type="video/mp4">
+              O seu navegador não suporta a etiqueta de vídeo.
             </video>
             
             <div class="video-overlay-details">
               <div class="video-caption">"Escutando música aleatória para amolecer a mente..."</div>
               <div class="video-controls">
                 <button class="ctrl-btn" id="playBtn" onclick="togglePlay()">Pausar</button>
-                <button class="ctrl-btn" id="soundBtn" onclick="toggleMute()">Ativar Som</button>
+                <button class="ctrl-btn" id="soundBtn" onclick="toggleMute()">Ouvir com Som 🔊</button>
               </div>
             </div>
           </div>
@@ -492,6 +495,14 @@
     const playBtn = document.getElementById('playBtn');
     const soundBtn = document.getElementById('soundBtn');
 
+    // Forçar tentativa de reprodução inicial sem som
+    window.addEventListener('DOMContentLoaded', () => {
+      video.muted = true;
+      video.play().catch(() => {
+        playBtn.innerText = 'Reproduzir';
+      });
+    });
+
     function togglePlay() {
       if (video.paused) {
         video.play();
@@ -505,10 +516,12 @@
     function toggleMute() {
       if (video.muted) {
         video.muted = false;
-        soundBtn.innerText = 'Silenciar';
+        video.volume = 1.0;
+        video.play();
+        soundBtn.innerText = 'Silenciar 🔇';
       } else {
         video.muted = true;
-        soundBtn.innerText = 'Ativar Som';
+        soundBtn.innerText = 'Ouvir com Som 🔊';
       }
     }
   </script>
